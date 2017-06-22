@@ -1,4 +1,4 @@
-<div id="post-<%= post.id %>" class="panel panel-info">
+<div id="post-<%= post.id %>" class="panel panel-danger">
   <div class="panel-heading"><%= post.user.display_name %></div>
   <div class="panel-body">
     <span id="post-thumbsup-<%= post.id %>" class="label label-success"><%= post.likes.count %>👍</span>
@@ -22,6 +22,7 @@
   </div>
 
   <div class="panel-footer">
+
     <% if current_user && current_user.is_admin? %>
       <%= select_tag "category_id[#{post.id}]", options_for_select(Category.all.map{ |x| [x.name, x.id]}, post.category_id),
           :data => { :url => post_path(post) }, :prompt => "请选择分类", :class => "select_category" %>
@@ -31,6 +32,13 @@
           <span id="post-flag-<%= post.id %>"><%= post.flag_at %></span>
       </label>
     <% end %>
+
+    <div class="text-right">
+      <span id="post-favourite-<%= post.id %>">
+        <%= render :partial => "favourite", :locals => { :post => post } %>
+      </span>
+    </div>
+
   </div>
 
 </div>

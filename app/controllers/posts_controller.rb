@@ -46,6 +46,23 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     like = @post.find_like(current_user)
     like.destroy
+
+    render "like"
+  end
+
+  def favourite
+    @post = Post.find(params[:id])
+    unless @post.find_favourite(current_user)
+      Favourite.create( :user => current_user, :post => @post)
+    end
+  end
+
+  def unfavourite
+    @post = Post.find(params[:id])
+    favourite = @post.find_favourite(current_user)
+    favourite.destroy
+
+    render "favourite"
   end
 
   def toggle_flag

@@ -1,0 +1,9 @@
+
+  共有<%= post.favourited_users.count %>人收藏
+  <% if current_user %>
+    <% if post.find_favourite(current_user) %>
+      <%= link_to(content_tag(:i, '取消收藏', class: 'fa fa-heart'), unfavourite_post_path(post),:method => :post, :remote => true) %>
+    <% else %>
+      <%= link_to(content_tag(:i, '收藏', class: "fa fa-heart-o"), favourite_post_path(post), :method => :post, :remote => true) %>
+    <% end %>
+  <% end %>

@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :liked_posts, :through => :likes, :source => :post
 
+  has_many :favourites, :dependent => :destroy
+  has_many :favourited_posts, :through => :favourites, :source => :post
+
   def display_name
     self.email.split("@").first
   end

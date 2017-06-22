@@ -16,6 +16,8 @@ root "posts#index"
       post "unlike" => "posts#unlike"
       post "toggle_flag" => "posts#toggle_flag"
       post "rate" => "posts#rate"
+      post "favourite" => "posts#favourite"
+      post "unfavourite" => "posts#unfavourite"
     end
   end
 

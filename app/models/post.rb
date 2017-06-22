@@ -6,6 +6,9 @@ class Post < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :liked_users, :through => :likes, :source => :user
 
+  has_many :favourites, :dependent => :destroy
+  has_many :favourited_users, :through => :favourites, :source => :user
+
   has_many :scores, :class_name => "PostScore"
 
   def find_score(user)
@@ -18,5 +21,9 @@ class Post < ApplicationRecord
 
   def find_like(user)
     self.likes.where( :user_id => user.id ).first
+  end
+
+  def find_favourite(user)
+    self.favourites.where( :user_id => user.id ).first
   end
 end
